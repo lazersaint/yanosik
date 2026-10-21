@@ -20,10 +20,13 @@
 
 extern void sonde_shim_init();    // z src/sonde_shim.cpp
 
-// Link do Yanosika: UART1 zmapowany na GP43/44 (te same fizyczne druty, ktorych
-// uzywa bootloader przy flashu). Przy USB-CDC-on-boot=Enabled 'Serial' to USB
-// (debug), wiec drut do Yanosika niesie wylacznie linijki $SON — czysto.
-#define YANO Serial1
+// Link do Yanosika: UART0 (Serial0) na GP43/44 — DOKLADNIE ten UART, ktorego
+// uzywa ROM-bootloader przy flashu. Dziala niezaleznie od "USB CDC On Boot":
+//  - CDC Enabled:  Serial=USB (debug), Serial0=UART0 -> drut niesie czysty $SON
+//  - CDC Disabled: Serial==Serial0=UART0 -> $SON + debug na drucie, Yanosik
+//    filtruje po "$SON" wiec i tak dziala.
+// (Wczesniej bylo Serial1 zmapowane na 43/44 — kolidowalo z UART0 przy CDC off.)
+#define YANO Serial0
 
 static SondeView _v;
 static uint32_t  _freq_hz = LORA_SONDE_FREQ;
