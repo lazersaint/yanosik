@@ -31,8 +31,10 @@ To **te same druty**, ktorych uzywa bootloader przy wgrywaniu z Yanosika
 
 ## Ustawienia w Arduino IDE
 - Plytka: **ESP32S3 Dev Module**
-- **USB CDC On Boot: Enabled**  ← wazne: debug idzie na USB, a drut do Yanosika niesie tylko `$SON`
-- Flash Size: 8MB (lub wg modulu), PSRAM: wg modulu (OPI/QSPI) — nieistotne, RAM i tak starcza
+- **Flash Size: 4MB (32Mb)**  ← SuperMini ma 4 MB! 16 MB = boot-loop (spi_flash probe failed)
+- **PSRAM: Disabled**          ← SuperMini bez PSRAM; wlaczony = init fail
+- **USB CDC On Boot: Enabled** (debug na USB; $SON i tak idzie po Serial0/UART0 43/44)
+- Partition Scheme: dowolny mieszczacy sie w 4MB (np. "Default 4MB with spiffs")
 - Biblioteka: **NimBLE-Arduino** (Library Manager)
 
 ## Format linijki UART (`$SON`)
