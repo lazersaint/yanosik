@@ -34,7 +34,8 @@ To **te same druty**, ktorych uzywa bootloader przy wgrywaniu z Yanosika
 - **Flash Size: 4MB (32Mb)**  ← SuperMini ma 4 MB! 16 MB = boot-loop (spi_flash probe failed)
 - **PSRAM: Disabled**          ← SuperMini bez PSRAM; wlaczony = init fail
 - **USB CDC On Boot: Enabled** (debug na USB; $SON i tak idzie po Serial0/UART0 43/44)
-- Partition Scheme: dowolny mieszczacy sie w 4MB (np. "Default 4MB with spiffs")
+- **Partition Scheme: "Huge APP (3MB No OTA/1MB SPIFFS)"** ← MUSI miescic sie w 4MB!
+  (schemat >4MB = blad "partition invalid ... exceeds flash chip size 0x400000")
 - Biblioteka: **NimBLE-Arduino** (Library Manager)
 
 ## Format linijki UART (`$SON`)
